@@ -1,4 +1,8 @@
 var restify = require('restify');
+var mongoose = require('mongoose');
+
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://WillWise:igotskillz@ds139122.mlab.com:39122/igotskillzgal');
 
 function respond(req, res, next) {
   res.send('hello ' + req.params.name);
@@ -10,7 +14,7 @@ var server = restify.createServer();
 // server.head('/hello/:name', respond);
 //this will create a new skill in the skillz table
 server.post('/skill', function(req, res, next){
-	
+
 });
 //this will get skillz by ID
 server.get('/skill/:id', function(req, res, next){
