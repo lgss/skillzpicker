@@ -12,6 +12,7 @@
   "author": "Will\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[C\u001b[C\u001bBig flashing lights Will Wise Big flashing lights",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^5.0.1",
     "mongodb": "^3.0.6",
     "mongoose": "^5.0.14",
     "restify": "^7.1.1"
