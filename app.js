@@ -29,12 +29,17 @@ server.post('/skill', function(req, res, next){
 		if (err){
 			res.send(400, {error:err.message});
 		}
-		res.send(200,{id:uzer.id});
+		res.send(200,{id:skill.id});
 	})
 });
 //this will get skillz by ID
 server.get('/skill/:id', function(req, res, next){
-	
+	Skill.findById(req.params.id, function(err, skill){
+		if (err) {
+			res.send(400,{error:err.message});
+		} 
+		res.send(200,{skill:skill});
+	})
 });
 //this will create a uzer
 //{name:name,slackId:slackId}
