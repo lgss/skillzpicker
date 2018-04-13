@@ -10,5 +10,19 @@
     "skillz"
   ],
   "author": "Will\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[C\u001b[C\u001bBig flashing lights Will Wise Big flashing lights",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^3.0.6",
+    "mongoose": "^5.0.14",
+    "restify": "^7.1.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lgss/skillzpicker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lgss/skillzpicker/issues"
+  },
+  "homepage": "https://github.com/lgss/skillzpicker#readme"
 }
