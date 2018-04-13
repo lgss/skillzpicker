@@ -51,7 +51,13 @@ server.post('/uzer', function(req, res, next){
 });
 //This will get uzer by name
 server.get('/uzer/:name', function(req, res, next){
-
+	Uzer.findOne({name:req.params.name}, function(err, uzer){
+		if(err){
+			res.send(400,{error:error.message});
+		}
+		console.log(uzer);
+		res.send(200,{user:uzer});
+	})
 });
 //get all uzerz
 server.get('/alluzerz', function(req, res, next){
