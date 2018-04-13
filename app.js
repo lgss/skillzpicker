@@ -60,7 +60,6 @@ server.get('/uzer/:name', function(req, res, next){
 		if(err){
 			res.send(400,{error:error.message});
 		}
-		console.log(uzer);
 		res.send(200,{user:uzer});
 	})
 });
@@ -69,16 +68,20 @@ server.get('/alluzerz', function(req, res, next){
 	var query = Uzer.find({});
 	var promise = query.exec();
 	promise.then(function (docs) {
-		console.log(docs);
-		res.send(200);
+		res.send(200, docs);
 	}).catch(function(err){
-		console.log(err);
-		res.send(400);
+		res.send(400, err);
 	});
 });
 //this will give back a list of all the skillz in the db
 server.get('/allskillz', function(req, res, next){
-	
+	var query = Skill.find({});
+	var promise = query.exec();
+	promise.then(function (docs){
+		res.send(200, docs);
+	}).catch(function(err){
+		res.send(400, err);
+	});
 });
 
 server.listen(8080, function() {
