@@ -9,9 +9,6 @@ mongoose.connect(`mongodb://${DBUSER}:${DBPWD}@${DBLINK}`);
 var Uzer = require('./models/Uzer.js');
 var Skill = require('./models/skill.js');
 
-
-
-
 function respond(req, res, next) {
   res.send('hello ' + req.params.name);
   next();
@@ -23,6 +20,9 @@ server.use(restify.plugins.bodyParser());
 // server.head('/hello/:name', respond);
 //this will create a new skill in the skillz table
 server.post('/skill', function(req, res, next){
+	if(!req.body || req.body.name===''){
+		res.send(400, {error: "please add a name to create a skill"})
+	}
 	var skill = new Skill;
 	skill.name = req.body.name;
 	skill.save(function(err){
@@ -34,10 +34,17 @@ server.post('/skill', function(req, res, next){
 });
 //this will get skillz by ID
 server.get('/skill/:id', function(req, res, next){
+	if(!req.params.id){
+		res.send(400, {error:"please enter an id"})
+	}
 	Skill.findById(req.params.id, function(err, skill){
 		if (err) {
+			//console.log(res);
 			res.send(400,{error:err.message});
-		} 
+		}
+		if(!skill){
+			res.send(404, {message: "skill not found"});
+		}
 		res.send(200,{skill:skill});
 	})
 });
