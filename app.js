@@ -6,7 +6,7 @@ const DBPWD = process.env.DBPWD;
 const DBLINK = process.env.DBLINK;
 mongoose.Promise = global.Promise;
 mongoose.connect(`mongodb://${DBUSER}:${DBPWD}@${DBLINK}`);
-var Uzer = require('./models/Uzer.js');
+var Uzer = require('./models/uzer.js');
 var Skill = require('./models/skill.js');
 
 function respond(req, res, next) {
