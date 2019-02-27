@@ -35,7 +35,7 @@ server.post('/skill', function(req, res, next){
 //this will get skillz by ID
 server.get('/skill/:id', function(req, res, next){
 	if(!req.params.id){
-		res.send(400, {error:"please enter an id"})
+		res.send(400, {error:"please enter an id"});
 	}
 	Skill.findById(req.params.id, function(err, skill){
 		if (err) {
@@ -48,6 +48,18 @@ server.get('/skill/:id', function(req, res, next){
 		res.send(200,{skill:skill});
 	})
 });
+//get skill by name
+server.get('/skillbyname/:name',function(req, res, next){
+	if(!req.params.name){
+		res.send(400, {error:"please enter a name"});
+	}
+	Skill.findOne({name:req.params.name}, function(err, skill){
+		if(err){
+			res.send(400,{error:err.message});
+		}
+		res.send(200, {skill:skill})
+	})
+})
 //this will create a uzer
 //{name:name,slackId:slackId}
 server.post('/uzer', function(req, res, next){
