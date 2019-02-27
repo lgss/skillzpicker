@@ -8,6 +8,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(`mongodb://${DBUSER}:${DBPWD}@${DBLINK}`);
 var Uzer = require('./models/uzer.js');
 var Skill = require('./models/skill.js');
+var UzerSkill = require('./models/uzerskill.js');
 
 function respond(req, res, next) {
   res.send('hello ' + req.params.name);
@@ -101,6 +102,18 @@ server.get('/allskillz', function(req, res, next){
 	}).catch(function(err){
 		res.send(400, err);
 	});
+});
+
+server.post('/uzerskill', function(req, res, next){
+	var uzerskill = new UzerSkill;
+	uzerskill.uzerId = req.body.uzerId;
+	uzerskill.skillId = req.body.skillId;
+	uzerskill.save(function(err){
+		if(err){
+			res.send(400, {error: error.message});
+		}
+		res.send(200, {id: uzerskill.id});
+	})
 });
 
 server.listen(process.env.PORT || 8080, function() {
