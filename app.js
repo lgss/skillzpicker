@@ -116,6 +116,15 @@ server.post('/uzerskill', function(req, res, next){
 	})
 });
 
+server.get('/uzerskillbyuzer/:uzerId', function(req, res, next){
+	UzerSkill.findOne({uzerId:req.params.uzerId}, function(err, uzerskill){
+		if(err){
+			res.send(400, {error: error.message});
+		}
+		res.send(200, {userskill: uzerskill});
+	})
+});
+
 server.listen(process.env.PORT || 8080, function() {
   console.log('%s listening at %s', server.name, server.url);
 });
