@@ -119,11 +119,14 @@ server.post('/uzerskill', function(req, res, next){
 server.get('/uzerskillbyuzer/:uzerId', function(req, res, next){
 	UzerSkill.find({uzerId:req.params.uzerId}, function(err, uzerskills){
 		if(err){
-			res.send(400, {error: error.message});
+			res.send(400, {error: err.message});
 		}
 		var skillArray = []
 		for (var i = 0; i < userskills.length; i++) {
 			Skill.findOne({_id:userskills[i].skillId}, function(err, skill){
+				if (err){
+					res.send(400, {error: err.message})
+				}
 				skillArray.push(skill);
 			})
 		}
