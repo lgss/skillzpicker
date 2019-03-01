@@ -121,18 +121,23 @@ server.get('/uzerskillbyuzer/:uzerId', function(req, res, next){
 		if(err){
 			res.send(400, {error: err.message});
 		}
-		var skillArray = []
-		for (var i = 0; i < userskills.length; i++) {
-			Skill.findOne({_id:userskills[i].skillId}, function(err, skill){
-				if (err){
-					res.send(400, {error: err.message})
-				}
-				skillArray.push(skill);
-			})
-		}
-		res.send(200, {userskill: skillArray});
+		console.log(getSkillArrayByIds(uzerskills));
+		res.send(200, {userskill: getSkillArrayByIds(uzerskills)});
 	})
 });
+
+function getSkillArrayByIds(userSkillArray){
+	var userSkillArray = []
+	for (var i = 0; i < userSkillArray.length; i++) {
+		Skill.findOne({_id:skillIdArray[i].skillId}, function(err, skill){
+			if (err){
+				res.send(400, {error: err.message});
+			}
+			skillArray.push(skill.name);
+		});
+	}
+	return userSkillArray;
+}
 
 server.listen(process.env.PORT || 8080, function() {
   console.log('%s listening at %s', server.name, server.url);
