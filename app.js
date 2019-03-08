@@ -121,7 +121,7 @@ server.post('/uzerskill', function(req, res, next){
 });
 
 server.get('/uzerskillbyuzer/:uzerId', function(req, res, next){
-	UzerSkill.findOne({uzerId:req.params.uzerId}).populate('skill').exec(function(err, uzerskill){
+	UzerSkill.findOne({uzerId:mongoose.mongo.ObjectId(req.params.uzerId)}).populate('skill').exec(function(err, uzerskill){
 		console.log(uzerskill.skill);
 	})
 });
