@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 // //var serializer = require('passport-mongoose-serializer');
 
 var Skill = new Schema({
+	_id: Schema.Types.ObjectId,
 	name: String
 });
 

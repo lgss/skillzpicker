@@ -21,11 +21,14 @@ server.use(restify.plugins.bodyParser());
 // server.head('/hello/:name', respond);
 //this will create a new skill in the skillz table
 server.post('/skill', function(req, res, next){
+	console.log(req);
 	if(!req.body || req.body.name===''){
 		res.send(400, {error: "please add a name to create a skill"})
 	}
 	var skill = new Skill;
+	skill._id = new mongoose.mongo.ObjectID();
 	skill.name = req.body.name;
+	console.log(skill);
 	skill.save(function(err){
 		if (err){
 			res.send(400, {error:err.message});
@@ -65,18 +68,19 @@ server.get('/skillbyname/:name',function(req, res, next){
 //{name:name,slackId:slackId}
 server.post('/uzer', function(req, res, next){
 	var uzer = new Uzer;
-	uzer.name = req.body.name;
+	uzer._id = new mongoose.mongo.ObjectID();
 	uzer.slackId = req.body.slackId;
 	uzer.save(function(err){
 		if (err) {
 			res.send(400,{error:err.message});
 		} 
+		console.log('test');
 		res.send(200,{id:uzer.id});
 	})
 });
 //This will get uzer by name
-server.get('/uzer/:name', function(req, res, next){
-	Uzer.findOne({name:req.params.name}, function(err, uzer){
+server.get('/uzer/:slackId', function(req, res, next){
+	Uzer.findOne({slackId:req.params.slackId}, function(err, uzer){
 		if(err){
 			res.send(400,{error:error.message});
 		}
@@ -117,12 +121,8 @@ server.post('/uzerskill', function(req, res, next){
 });
 
 server.get('/uzerskillbyuzer/:uzerId', function(req, res, next){
-	UzerSkill.find({uzerId:req.params.uzerId}, function(err, uzerskills){
-		if(err){
-			res.send(400, {error: err.message});
-		}
-		console.log(getSkillArrayByIds(uzerskills));
-		res.send(200, {userskill: getSkillArrayByIds(uzerskills)});
+	UzerSkill.findOne({uzerId:req.params.uzerId}).populate('skill').exec(function(err, uzerskill){
+		console.log(uzerskill.skill);
 	})
 });
 
