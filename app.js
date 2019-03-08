@@ -123,7 +123,7 @@ server.post('/uzerskill', function(req, res, next){
 server.get('/uzerskillbyuzer/:uzerId', function(req, res, next){
 	console.log(mongoose.mongo.ObjectId(req.params.uzerId));
 	UzerSkill.find({uzerId:mongoose.mongo.ObjectId(req.params.uzerId)}).populate('skill').exec(function(err, uzerskill){
-		console.log(uzerskill.skill);
+		console.log(uzerskill);
 	})
 });
 
