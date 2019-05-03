@@ -5,7 +5,6 @@ var Schema = mongoose.Schema;
 // //var serializer = require('passport-mongoose-serializer');
 
 var Uzer = new Schema({
-	_id: Schema.Types.ObjectId,
 	slackId: String
 });
 
