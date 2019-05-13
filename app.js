@@ -6,8 +6,8 @@ const DBUSER = process.env.DBUSER;
 const DBPWD = process.env.DBPWD;
 const DBLINK = process.env.DBLINK;
 mongoose.Promise = global.Promise;
-mongoose.connect(`mongodb://localhost:27017/test`);
-//mongoose.connect(`mongodb://${DBUSER}:${DBPWD}@${DBLINK}`);
+//mongoose.connect(`mongodb://localhost:27017/test`);
+mongoose.connect(`mongodb://${DBUSER}:${DBPWD}@${DBLINK}`);
 var Uzer = require('./models/uzer.js');
 var Skill = require('./models/skill.js');
 var UzerSkill = require('./models/uzerskill.js');
@@ -121,7 +121,7 @@ server.post('/uzerskill', function(req, res, next){
 	})
 });
 
-server.get('/uzerskillbyuzer/:uzerId', function(req, res, next){
+server.get('/skillsbyuzer/:uzerId', function(req, res, next){
 	var skillList = [];
 	Uzer.findOne({slackId:req.params.uzerId}, function(err, uzer){	
 		var i = 0;
@@ -139,6 +139,13 @@ server.get('/uzerskillbyuzer/:uzerId', function(req, res, next){
 	})
 	
 });
+
+server.get('/uzersbyskill/:skillId', function(req, res, next){
+	console.log(req.params.skillId);
+	Uzer.find({skills:req.params.skillId}, function(err, uzers){
+		res.send(200, uzers);
+	})
+})
 
 server.listen(process.env.PORT || 8080, function() {
   console.log('%s listening at %s', server.name, server.url);
