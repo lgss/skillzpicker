@@ -5,7 +5,8 @@ var Schema = mongoose.Schema;
 // //var serializer = require('passport-mongoose-serializer');
 
 var Uzer = new Schema({
-	slackId: String
+	slackId: String,
+	skills: [{type: String}]
 });
 
 // User.plugin(passportLocalMongoose);

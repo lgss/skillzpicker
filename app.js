@@ -1,11 +1,13 @@
 require('dotenv').config()
 var restify = require('restify');
 var mongoose = require('mongoose');
+var async = require("async");
 const DBUSER = process.env.DBUSER;
 const DBPWD = process.env.DBPWD;
 const DBLINK = process.env.DBLINK;
 mongoose.Promise = global.Promise;
-mongoose.connect(`mongodb://${DBUSER}:${DBPWD}@${DBLINK}`);
+mongoose.connect(`mongodb://localhost:27017/test`);
+//mongoose.connect(`mongodb://${DBUSER}:${DBPWD}@${DBLINK}`);
 var Uzer = require('./models/uzer.js');
 var Skill = require('./models/skill.js');
 var UzerSkill = require('./models/uzerskill.js');
@@ -67,14 +69,14 @@ server.get('/skillbyname/:name',function(req, res, next){
 //this will create a uzer
 //{name:name,slackId:slackId}
 server.post('/uzer', function(req, res, next){
+	console.log(req.body);
 	var uzer = new Uzer;
-	uzer._id = new mongoose.mongo.ObjectID();
 	uzer.slackId = req.body.slackId;
+	console.log(uzer);
 	uzer.save(function(err){
 		if (err) {
 			res.send(400,{error:err.message});
 		} 
-		console.log('test');
 		res.send(200,{id:uzer.id});
 	})
 });
@@ -109,36 +111,34 @@ server.get('/allskillz', function(req, res, next){
 });
 
 server.post('/uzerskill', function(req, res, next){
-	var uzerskill = new UzerSkill;
-	uzerskill.uzerId = req.body.uzerId;
-	uzerskill.skillId = req.body.skillId;
-	uzerskill.save(function(err){
-		if(err){
-			res.send(400, {error: error.message});
-		}
-		res.send(200, {id: uzerskill.id});
+	Skill.findOne({name: req.body.skillName}, function(err, skill){
+		Uzer.findOne({slackId: req.body.slackId}, function(err, uzer){
+			console.log(uzer);
+			uzer.skills.push(skill._id);
+			uzer.save();
+			res.send(200,{message: 'success'});
+		})
 	})
 });
 
 server.get('/uzerskillbyuzer/:uzerId', function(req, res, next){
-	//console.log(mongoose.mongo.ObjectId(req.params.uzerId));
-	UzerSkill.find({uzerId:req.params.uzerId}).populate('skill').exec(function(err, uzerskill){
-		console.log(uzerskill);
-	})
-});
-
-function getSkillArrayByIds(userSkillArray){
-	var userSkillArray = []
-	for (var i = 0; i < userSkillArray.length; i++) {
-		Skill.findOne({_id:skillIdArray[i].skillId}, function(err, skill){
-			if (err){
-				res.send(400, {error: err.message});
-			}
-			skillArray.push(skill.name);
+	var skillList = [];
+	Uzer.findOne({slackId:req.params.uzerId}, function(err, uzer){	
+		var i = 0;
+		async.each(uzer.skills, function(listItem, next){
+			listItem.position = i;
+			Skill.findOne({_id:listItem}, function(err, skill){
+				console.log(skill);
+				skillList.push(skill.name);
+				i++;
+				next();
+			})
+		}, function(err){
+			res.send(200, skillList);
 		});
-	}
-	return userSkillArray;
-}
+	})
+	
+});
 
 server.listen(process.env.PORT || 8080, function() {
   console.log('%s listening at %s', server.name, server.url);
