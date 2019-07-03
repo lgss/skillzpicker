@@ -23,14 +23,12 @@ server.use(restify.plugins.bodyParser());
 // server.head('/hello/:name', respond);
 //this will create a new skill in the skillz table
 server.post('/skill', function(req, res, next){
-	console.log(req);
 	if(!req.body || req.body.name===''){
 		res.send(400, {error: "please add a name to create a skill"})
 	}
 	var skill = new Skill;
 	skill._id = new mongoose.mongo.ObjectID();
 	skill.name = req.body.name;
-	console.log(skill);
 	skill.save(function(err){
 		if (err){
 			res.send(400, {error:err.message});
@@ -45,7 +43,6 @@ server.get('/skill/:id', function(req, res, next){
 	}
 	Skill.findById(req.params.id, function(err, skill){
 		if (err) {
-			//console.log(res);
 			res.send(400,{error:err.message});
 		}
 		if(!skill){
@@ -69,10 +66,8 @@ server.get('/skillbyname/:name',function(req, res, next){
 //this will create a uzer
 //{name:name,slackId:slackId}
 server.post('/uzer', function(req, res, next){
-	console.log(req.body);
 	var uzer = new Uzer;
 	uzer.slackId = req.body.slackId;
-	console.log(uzer);
 	uzer.save(function(err){
 		if (err) {
 			res.send(400,{error:err.message});
@@ -111,10 +106,8 @@ server.get('/allskillz', function(req, res, next){
 });
 
 server.post('/uzerskill', function(req, res, next){
-	Skill.findOne({_id: req.body.skillName}, function(err, skill){
-		console.log(skill);
+	Skill.findOne({_id: req.body.skillId}, function(err, skill){
 		Uzer.findOne({slackId: req.body.slackId}, function(err, uzer){
-			console.log(uzer);
 			uzer.skills.push(skill._id);
 			uzer.save();
 			res.send(200,{message: 'success'});
@@ -129,7 +122,6 @@ server.get('/skillsbyuzer/:uzerId', function(req, res, next){
 		async.each(uzer.skills, function(listItem, next){
 			listItem.position = i;
 			Skill.findOne({_id:listItem}, function(err, skill){
-				console.log(skill);
 				skillList.push(skill.name);
 				i++;
 				next();
@@ -142,7 +134,6 @@ server.get('/skillsbyuzer/:uzerId', function(req, res, next){
 });
 
 server.get('/uzersbyskill/:skillId', function(req, res, next){
-	console.log(req.params.skillId);
 	Uzer.find({skills:req.params.skillId}, function(err, uzers){
 		res.send(200, uzers);
 	})
