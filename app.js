@@ -111,7 +111,7 @@ server.get('/allskillz', function(req, res, next){
 });
 
 server.post('/uzerskill', function(req, res, next){
-	Skill.findOne({name: req.body.name}, function(err, skill){
+	Skill.findOne({_id: req.body.skillName}, function(err, skill){
 		console.log(skill);
 		Uzer.findOne({slackId: req.body.slackId}, function(err, uzer){
 			console.log(uzer);
