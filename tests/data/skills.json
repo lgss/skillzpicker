@@ -215,54 +215,54 @@
     "alternatives": []
 }, {
     "name": "DevOps",
-    "alternatives": []
+    "alternatives": ["devops","dev ops"]
 },
 {
     "name": "ERP",
-    "alternatives": []
+    "alternatives": ["erp","agresso","unit 4","business world"]
 },
 {
-    "name": "SOAPUI",
-    "alternatives": []
+    "name": "SOAP UI",
+    "alternatives": ["soap ui","soapui"]
 },
 {
     "name": "Trello",
-    "alternatives": []
+    "alternatives": ["trello"]
 },
 {
     "name": "CI/CD",
-    "alternatives": []
+    "alternatives": ["ci/cd","continuous integration","continuous delivery","continuous deployment"]
 },
 {
     "name": "Entity Framework",
-    "alternatives": []
+    "alternatives": ["entity framework","ef"]
 },
 {
     "name": "ASP.NET",
-    "alternatives": []
+    "alternatives": ["asp.net","asp dot net"]
 },
 {
     "name": "MVC",
-    "alternatives": []
+    "alternatives": ["mvc"]
 },
 {
     "name": "MVVC",
-    "alternatives": []
+    "alternatives": ["mvvc"]
 },
 {
     "name": "Vue.js",
-    "alternatives": []
+    "alternatives": ["vue.js","vue","vuejs"]
 },
 {
     "name": "Apache",
-    "alternatives": []
+    "alternatives": ["apache"]
 },
 {
     "name": "NGinx",
-    "alternatives": []
+    "alternatives": ["nginx"]
 },
 {
     "name": "Lets Go Direct",
-    "alternatives": []
+    "alternatives": ["lets go direct","lgd"]
 }
 ]
