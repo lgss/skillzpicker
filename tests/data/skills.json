@@ -213,5 +213,56 @@
 {
     "name": "assertiveness",
     "alternatives": []
+}, {
+    "name": "DevOps",
+    "alternatives": []
+},
+{
+    "name": "ERP",
+    "alternatives": []
+},
+{
+    "name": "SOAPUI",
+    "alternatives": []
+},
+{
+    "name": "Trello",
+    "alternatives": []
+},
+{
+    "name": "CI/CD",
+    "alternatives": []
+},
+{
+    "name": "Entity Framework",
+    "alternatives": []
+},
+{
+    "name": "ASP.NET",
+    "alternatives": []
+},
+{
+    "name": "MVC",
+    "alternatives": []
+},
+{
+    "name": "MVVC",
+    "alternatives": []
+},
+{
+    "name": "Vue.js",
+    "alternatives": []
+},
+{
+    "name": "Apache",
+    "alternatives": []
+},
+{
+    "name": "NGinx",
+    "alternatives": []
+},
+{
+    "name": "Lets Go Direct",
+    "alternatives": []
 }
 ]
