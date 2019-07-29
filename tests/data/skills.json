@@ -1,0 +1,217 @@
+[{
+    "name": "C#",
+    "alternatives": ["c#", "c sharp"]
+},
+{
+    "name": "HTML",
+    "alternatives": ["html", "hypertext markup language"]
+}, {
+    "name": "JavaScript",
+    "alternatives": ["js", "javascript"]
+}, {
+    "name": "python",
+    "alternatives": ["py"]
+},
+{
+    "name": "Node.js",
+    "alternatives": ["node.js", "nodejs", "node"]
+}, {
+    "name": "Selenium",
+    "alternatives": ["selenium"]
+}, {
+    "name": "Outsystems",
+    "alternatives": ["outsystems"]
+}, {
+    "name": "Firmstep",
+    "alternatives": ["fs", "firmstep"]
+}, {
+    "name": "git",
+    "alternatives": []
+}, {
+    "name": "GitHub",
+    "alternatives": ["github", "Github"]
+}, {
+    "name": "AWS",
+    "alternatives": ["aws", "Amazon Web Services"]
+}, {
+    "name": "WordPress",
+    "alternatives": ["wordpress", "Wordpress"]
+}, {
+    "name": "Postman",
+    "alternatives": ["postman"]
+}, {
+    "name": "JSON",
+    "alternatives": ["json", "javascript object notation language"]
+}, {
+    "name": "XML",
+    "alternatives": ["xml", "extensible markup language"]
+}, {
+    "name": "YAML",
+    "alternatives": ["yaml", "yaml ain't markup language", "yet another markup language"]
+}, {
+    "name": "XSLT",
+    "alternatives": ["xslt", "extensible stylesheet language transformations"]
+}, {
+    "name": "Powerpoint",
+    "alternatives": ["powerpoint", "pptx", "ppt"]
+}, {
+    "name": "Outlook",
+    "alternatives": ["outlook", "msoutlook"]
+}, {
+    "name": "Notepad",
+    "alternatives": []
+}, {
+    "name": "Visual Studio",
+    "alternatives": ["visual studio"]
+}, {
+    "name": "VS Code",
+    "alternatives": ["vs code"]
+}, {
+    "name": "Pycharm",
+    "alternatives": ["pycharm"]
+}, {
+    "name": "Agile",
+    "alternatives": ["agile"]
+}, {
+    "name": "oAuth",
+    "alternatives": ["oauth"]
+}, {
+    "name": "REST",
+    "alternatives": ["rest", "restful"]
+}, {
+    "name": "SOAP",
+    "alternatives": ["soap"]
+}, {
+    "name": "Mongo",
+    "alternatives": ["mongo", "mongodb"]
+}, {
+    "name": "Windows",
+    "alternatives": ["windows"]
+}, {
+    "name": "Linux",
+    "alternatives": ["linux"]
+}, {
+    "name": "IE",
+    "alternatives": ["ie", "internet explorer", "edge"]
+}, {
+    "name": "SQL",
+    "alternatives": ["sql"]
+}, {
+    "name": "Azure",
+    "alternatives": ["azure", "microsoft azure"]
+}, {
+    "name": "DynamoDB",
+    "alternatives": ["dynamodb", "dynamo db", "dynamo"]
+}, {
+    "name": "MatSoft",
+    "alternatives": ["matsoft", "mats"]
+}, {
+    "name": "CosmosDB",
+    "alternatives": ["cosmosdb", "cosmos db"]
+}, {
+    "name": "Serverless",
+    "alternatives": ["serverless"]
+}, {
+    "name": "TDD",
+    "alternatives": ["tdd", "test driven development"]
+}, {
+    "name": "BDD",
+    "alternatives": ["bdd", "behaviour driven development"]
+}, {
+    "name": "Slack",
+    "alternatives": ["slack"]
+}, {
+    "name": "Code reviews",
+    "alternatives": ["code review", "code reviews"]
+}, {
+    "name": "ADFS",
+    "alternatives": ["adfs", "active directory federation services"]
+}, {
+    "name": "listening",
+    "alternatives": []
+},
+{
+    "name": "understanding",
+    "alternatives": []
+},
+{
+    "name": "presenting",
+    "alternatives": []
+},
+{
+    "name": "coaching",
+    "alternatives": []
+},
+{
+    "name": "mentoring",
+    "alternatives": []
+},
+{
+    "name": "time management",
+    "alternatives": []
+},
+{
+    "name": "self motivation",
+    "alternatives": []
+},
+{
+    "name": "empathy",
+    "alternatives": []
+},
+{
+    "name": "team work",
+    "alternatives": []
+},
+{
+    "name": "estimation",
+    "alternatives": []
+},
+{
+    "name": "discipline",
+    "alternatives": []
+},
+{
+    "name": "focus",
+    "alternatives": []
+},
+{
+    "name": "conflict resolution",
+    "alternatives": []
+},
+{
+    "name": "resiliance",
+    "alternatives": []
+},
+{
+    "name": "collaboration",
+    "alternatives": []
+},
+{
+    "name": "creativity",
+    "alternatives": []
+},
+{
+    "name": "leadership",
+    "alternatives": []
+},
+{
+    "name": "big brains",
+    "alternatives": []
+},
+{
+    "name": "arnp",
+    "alternatives": ["all round nice person"]
+},
+{
+    "name": "patience",
+    "alternatives": []
+},
+{
+    "name": "honesty",
+    "alternatives": []
+},
+{
+    "name": "assertiveness",
+    "alternatives": []
+}
+]
