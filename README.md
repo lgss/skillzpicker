@@ -31,3 +31,10 @@ PersonSkill
 -SkillsID
 -PersonID
 ```
+
+## Tests
+
+1. Run `npm test` to run tests
+1. Any `/tests/*.spec.js`file will be run
+1. Tests use [Mocha](https://mochajs.org/) as a test runner
+1. Tests use [Chai](https://www.chaijs.com/) as an assertion library
