@@ -43,7 +43,7 @@ server.get('/skill/:id', function(req, res, next){
 	}
 	Skill.findById(req.params.id, function(err, skill){
 		if (err) {
-			res.send(400,{error:err.message});
+			return res.send(400,{error:err.message});
 		}
 		if(!skill){
 			res.send(404, {message: "skill not found"});
@@ -54,11 +54,11 @@ server.get('/skill/:id', function(req, res, next){
 //get skill by name
 server.get('/skillbyname/:name',function(req, res, next){
 	if(!req.params.name){
-		res.send(400, {error:"please enter a name"});
+		return res.send(400, {error:"please enter a name"});
 	}
 	Skill.findOne({name:req.params.name}, function(err, skill){
 		if(err){
-			res.send(400,{error:err.message});
+			return res.send(400,{error:err.message});
 		}
 		res.send(200, {skill:skill})
 	})
@@ -66,14 +66,23 @@ server.get('/skillbyname/:name',function(req, res, next){
 //this will create a uzer
 //{name:name,slackId:slackId}
 server.post('/uzer', function(req, res, next){
-	var uzer = new Uzer;
-	uzer.slackId = req.body.slackId;
-	uzer.save(function(err){
-		if (err) {
-			res.send(400,{error:err.message});
-		} 
-		res.send(200,{id:uzer.id});
-	})
+
+	Uzer.findOne({slackId:req.params.slackId}, function(err, uzer){
+		if(err){
+			res.send(400,{error:error.message});
+		}
+		if(uzer){
+			return res.send(400,{error:"user already exists"});
+		}
+		var user = new Uzer;
+		user.slackId = req.body.slackId;
+		user.save(function(err){
+			if (err) {
+				return res.send(400,{error:err.message});
+			} 
+			res.send(200,{id:user.id});
+		});
+	});
 });
 //This will get uzer by name
 server.get('/uzer/:slackId', function(req, res, next){
@@ -84,6 +93,7 @@ server.get('/uzer/:slackId', function(req, res, next){
 		res.send(200,{user:uzer});
 	})
 });
+
 //get all uzerz
 server.get('/alluzerz', function(req, res, next){
 	var query = Uzer.find({});
@@ -94,6 +104,7 @@ server.get('/alluzerz', function(req, res, next){
 		res.send(400, err);
 	});
 });
+
 //this will give back a list of all the skillz in the db
 server.get('/allskillz', function(req, res, next){
 	var query = Skill.find({});
