@@ -26,14 +26,22 @@ server.post('/skill', function(req, res, next){
 	if(!req.body || req.body.name===''){
 		res.send(400, {error: "please add a name to create a skill"})
 	}
-	var skill = new Skill;
-	skill._id = new mongoose.mongo.ObjectID();
-	skill.name = req.body.name;
-	skill.save(function(err){
-		if (err){
-			res.send(400, {error:err.message});
+
+	Skill.findOne({name:req.params.name}, function(err, skill){
+
+		if(skill){
+			return res.send(400, {error: "This skill already exists"});
 		}
-		res.send(200,{id:skill.id});
+
+		var skill = new Skill;
+		skill._id = new mongoose.mongo.ObjectID();
+		skill.name = req.body.name;
+		skill.save(function(err){
+			if (err){
+				res.send(400, {error:err.message});
+			}
+			return res.send(200,{id:skill.id});
+		})
 	})
 });
 //this will get skillz by ID
