@@ -127,6 +127,9 @@ server.get('/allskillz', function(req, res, next){
 server.post('/uzerskill', function(req, res, next){
 	Skill.findOne({_id: req.body.skillId}, function(err, skill){
 		Uzer.findOne({slackId: req.body.slackId}, function(err, uzer){
+			if(uzer.skills.indexOf(skill._id) > -1){
+				return res.send(400, {error:"user skill already exists"})
+			}
 			uzer.skills.push(skill._id);
 			uzer.save();
 			res.send(200,{message: 'success'});
