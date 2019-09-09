@@ -27,7 +27,7 @@ server.post('/skill', function(req, res, next){
 		res.send(400, {error: "please add a name to create a skill"})
 	}
 
-	Skill.findOne({name:req.params.name}, function(err, skill){
+	Skill.findOne({name:req.params.name},null,{lean:true}, function(err, skill){
 
 		if(skill){
 			return res.send(400, {error: "This skill already exists"});
@@ -38,7 +38,7 @@ server.post('/skill', function(req, res, next){
 		skill.name = req.body.name;
 		skill.save(function(err){
 			if (err){
-				res.send(400, {error:err.message});
+				return res.send(400, {error:err.message});
 			}
 			return res.send(200,{id:skill.id});
 		})
@@ -88,7 +88,7 @@ server.post('/uzer', function(req, res, next){
 			if (err) {
 				return res.send(400,{error:err.message});
 			} 
-			res.send(200,{id:user.id});
+			return res.send(200,{id:user.id});
 		});
 	});
 });
