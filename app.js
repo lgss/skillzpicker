@@ -161,6 +161,23 @@ server.get('/uzersbyskill/:skillId', function(req, res, next){
 	})
 })
 
+server.post('/removeuzerskill', function(req, res, next){
+	Uzer.findOne({slackId:req.body.slackId},function(err, uzer){
+		if(!uzer){
+			return res.send(400,"user doesn't exist");
+		} else if(uzer.skills.indexOf('"' + req.body.skillId + '"') > -1) {
+			return res.send(400, "user doesn't know this skill");
+		}
+		for(var i = 0; i < uzer.skills.length; i++){
+			if (uzer.skills[i] == req.body.skillId){
+				uzer.skills.splice(i, 1);
+			}
+		}
+		uzer.save();
+		res.send(200,'skill removed');
+	});
+});
+
 server.listen(process.env.PORT || 8080, function() {
   console.log('%s listening at %s', server.name, server.url);
 });
