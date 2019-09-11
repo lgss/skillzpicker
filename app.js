@@ -6,8 +6,8 @@ const DBUSER = process.env.DBUSER;
 const DBPWD = process.env.DBPWD;
 const DBLINK = process.env.DBLINK;
 mongoose.Promise = global.Promise;
-//mongoose.connect(`mongodb://localhost:27017/test`);
-mongoose.connect(`mongodb://${DBUSER}:${DBPWD}@${DBLINK}`);
+mongoose.connect(`mongodb://localhost:27017/test`);
+//mongoose.connect(`mongodb://${DBUSER}:${DBPWD}@${DBLINK}`);
 var Uzer = require('./models/uzer.js');
 var Skill = require('./models/skill.js');
 var UzerSkill = require('./models/uzerskill.js');
@@ -139,12 +139,12 @@ server.post('/uzerskill', function(req, res, next){
 
 server.get('/skillsbyuzer/:uzerId', function(req, res, next){
 	var skillList = [];
-	Uzer.findOne({slackId:req.params.uzerId}, function(err, uzer){	
+	Uzer.findOne({slackId:req.params.uzerId}, function(err, uzer){
 		var i = 0;
 		async.each(uzer.skills, function(listItem, next){
 			listItem.position = i;
 			Skill.findOne({_id:listItem}, function(err, skill){
-				skillList.push(skill.name);
+				skillList.push({"skill":skill.name, "skillId":skill.id});
 				i++;
 				next();
 			})
@@ -152,7 +152,6 @@ server.get('/skillsbyuzer/:uzerId', function(req, res, next){
 			res.send(200, skillList);
 		});
 	})
-	
 });
 
 server.get('/uzersbyskill/:skillId', function(req, res, next){
