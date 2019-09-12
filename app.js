@@ -177,6 +177,20 @@ server.post('/removeuzerskill', function(req, res, next){
 	});
 });
 
+server.get('/getusersbyskill/:skillId', function(req, res, next){
+	Uzer.find({ skills: req.params.skillId}, function(err,uzers){
+		console.log(uzers);
+		if(uzers.length == 0){
+			return res.send(400, {error: "Nobody has that skill"});
+		}
+		var userArray = [];
+		for(var i = 0; i < uzers.length; i++){
+			userArray.push(uzers[i].slackId);
+		}
+		res.send(200,userArray);
+	})
+});
+
 server.listen(process.env.PORT || 8080, function() {
   console.log('%s listening at %s', server.name, server.url);
 });
