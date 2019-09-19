@@ -1,16 +1,16 @@
 require('dotenv').config()
-var restify = require('restify');
-var mongoose = require('mongoose');
-var async = require("async");
+const restify = require('restify');
+const mongoose = require('mongoose');
+const async = require("async");
 const DBUSER = process.env.DBUSER;
 const DBPWD = process.env.DBPWD;
 const DBLINK = process.env.DBLINK;
 mongoose.Promise = global.Promise;
 //mongoose.connect(`mongodb://localhost:27017/test`);
 mongoose.connect(`mongodb://${DBUSER}:${DBPWD}@${DBLINK}`);
-var Uzer = require('./models/uzer.js');
-var Skill = require('./models/skill.js');
-var UzerSkill = require('./models/uzerskill.js');
+const Uzer = require('./models/uzer.js');
+const Skill = require('./models/skill.js');
+const UzerSkill = require('./models/uzerskill.js');
 
 function respond(req, res, next) {
   res.send('hello ' + req.params.name);
