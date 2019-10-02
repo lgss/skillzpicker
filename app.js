@@ -75,7 +75,7 @@ server.get('/skillbyname/:name',function(req, res, next){
 //{name:name,slackId:slackId}
 server.post('/uzer', function(req, res, next){
 
-	Uzer.findOne({slackId:req.params.slackId}, function(err, uzer){
+	Uzer.findOne({slackId:req.body.slackId}, function(err, uzer){
 		if(err){
 			res.send(400,{error:error.message});
 		}
