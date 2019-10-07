@@ -71,6 +71,15 @@ server.get('/skillbyname/:name',function(req, res, next){
 		res.send(200, {skill:skill})
 	})
 })
+
+server.del('/skill/:id', function(req, res, next){
+	Skill.deleteOne({_id : req.params.id},function(err){
+		if(err){
+			return res.send(400, {error: err.message});
+		}
+		res.send(200, {message:'skill deleted'})
+	})
+})
 //this will create a uzer
 //{name:name,slackId:slackId}
 server.post('/uzer', function(req, res, next){
