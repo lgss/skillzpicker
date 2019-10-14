@@ -6,8 +6,8 @@ const DBUSER = process.env.DBUSER;
 const DBPWD = process.env.DBPWD;
 const DBLINK = process.env.DBLINK;
 mongoose.Promise = global.Promise;
-//mongoose.connect(`mongodb://localhost:27017/test`);
-mongoose.connect(`mongodb://${DBUSER}:${DBPWD}@${DBLINK}`);
+mongoose.connect(`mongodb://localhost:27017/test`);
+//mongoose.connect(`mongodb://${DBUSER}:${DBPWD}@${DBLINK}`);
 var Uzer = require('./models/uzer.js');
 var Skill = require('./models/skill.js');
 var UzerSkill = require('./models/uzerskill.js');
@@ -99,6 +99,18 @@ server.post('/uzer', function(req, res, next){
 			} 
 			return res.send(200,{id:user.id});
 		});
+	});
+});
+
+server.del('/uzer/:slackId', function(req, res, next){
+	if(!req.params.slackId){
+		return res.send(400, {error: "you must send a slack Id to delete a uzer"})
+	}
+	Uzer.deleteOne({slackId : req.params.slackId},function(err){
+		if(err){
+			return res.send(400, {error: err.message});
+		}
+		return res.send(200, {message:'uzer deleted'});
 	});
 });
 //This will get uzer by name
