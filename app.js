@@ -68,6 +68,9 @@ server.get('/skillbyname/:name',function(req, res, next){
 		if(err){
 			return res.send(400,{error:err.message});
 		}
+		if(!skill) {
+			return res.send(404,{error:"Skill not found"});
+		}
 		res.send(200, {skill:skill})
 	})
 })
