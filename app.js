@@ -7,10 +7,17 @@ const DBPWD = process.env.DBPWD;
 const DBLINK = process.env.DBLINK;
 mongoose.Promise = global.Promise;
 //mongoose.connect(`mongodb://localhost:27017/test`);
-mongoose.connect(`mongodb://${DBUSER}:${DBPWD}@${DBLINK}`);
-const Uzer = require('./models/uzer.js');
 const Skill = require('./models/skill.js');
 const UzerSkill = require('./models/uzerskill.js');
+const Uzer = require('./models/uzer.js');
+const db = require('./db.js')
+
+mongoose.connect(`mongodb://${DBUSER}:${DBPWD}@${DBLINK}`)
+.then(response => {
+	console.log("Connected to database");
+	return db.index(Skill).then(res => {console.log(`Indexed ${res} skills`)})
+})
+.then(console.log);
 
 function respond(req, res, next) {
   res.send('hello ' + req.params.name);
