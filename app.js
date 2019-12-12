@@ -26,8 +26,7 @@ server.post('/skill', function (req, res, next) {
 		res.send(400, { error: "please add a name to create a skill" })
 	}
 
-	Skill.findOne({ name: req.params.name }, null, { lean: true }, function (err, skill) {
-
+	Skill.findOne({name:req.body.name},null,{lean:true}, function(err, skill){
 		if (skill) {
 			return res.send(400, { error: "This skill already exists" });
 		}
@@ -73,13 +72,21 @@ server.get('/skillbyname/:name', function (req, res, next) {
 		res.send(200, { skill: skill })
 	})
 })
+
+server.del('/skill/:id', function(req, res, next){
+	Skill.deleteOne({_id : req.params.id},function(err){
+		if(err){
+			return res.send(400, {error: err.message});
+		}
+		res.send(200, {message:'skill deleted'})
+	})
+})
 //this will create a uzer
 //{name:name,slackId:slackId}
 server.post('/uzer', function (req, res, next) {
-
-	Uzer.findOne({ slackId: req.params.slackId }, function (err, uzer) {
-		if (err) {
-			res.send(400, { error: error.message });
+	Uzer.findOne({slackId:req.body.slackId}, function(err, uzer){
+		if(err){
+			res.send(400,{error:error.message});
 		}
 		if (uzer) {
 			return res.send(400, { error: "user already exists" });
@@ -92,6 +99,18 @@ server.post('/uzer', function (req, res, next) {
 			}
 			return res.send(200, { id: user.id });
 		});
+	});
+});
+
+server.del('/uzer/:slackId', function(req, res, next){
+	if(!req.params.slackId){
+		return res.send(400, {error: "you must send a slack Id to delete a uzer"})
+	}
+	Uzer.deleteOne({slackId : req.params.slackId},function(err){
+		if(err){
+			return res.send(400, {error: err.message});
+		}
+		return res.send(200, {message:'uzer deleted'});
 	});
 });
 //This will get uzer by name
