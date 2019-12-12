@@ -1,16 +1,37 @@
-var mongoose = require('mongoose');
-var mongoosastic = require('mongoosastic')
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const mongoosastic = require('mongoosastic')
+const Schema = mongoose.Schema;
+const esClient = require('../es.js');
+
+// esClient.indices.exists({ index: 'skills' })
+// 	.catch(() => {
+// 		esClient.indices.create({
+
+// 			index: 'skills'
+// 		}, function (err, resp, status) {
+// 			if (err) {
+// 				console.log(err);
+// 			}
+// 			else {
+// 				console.log("create", resp);
+// 			}
+// 		});
+// 	})
+esClient.indices.initialize({index:'skills'});
+var SkillSchema = new Schema({
+	name: { type: String, es_indexed: true }
+});
+
+
+SkillSchema.plugin(mongoosastic, {
+	esClient: esClient
+});
 
 // var passportLocalMongoose = require('passport-local-mongoose');
 // //var findOrCreate = require('mongoose-findorcreate');
 // //var serializer = require('passport-mongoose-serializer');
 
-var SkillSchema = new Schema({
-	name: { type: String, es_indexed: true }
-});
 
-SkillSchema.plugin(mongoosastic)
 
 // User.plugin(passportLocalMongoose);
 // //User.plugin(findOrCreate);
