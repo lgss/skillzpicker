@@ -1,4 +1,8 @@
 const Skill = require('./models/skill.js');
+const mongoose = require('mongoose');
+const DBUSER = process.env.DBUSER;
+const DBPWD = process.env.DBPWD;
+const DBLINK = process.env.DBLINK;
 
 const index = (model) => {
     return new Promise((resolve, reject) => {
@@ -6,7 +10,7 @@ const index = (model) => {
         stream.on('data', function (err, doc) {
             count++;
         });
-        stream.on('close', ()=>{
+        stream.on('close', () => {
             resolve(count);
         });
         stream.on('error', reject);
@@ -28,7 +32,7 @@ const searchSkills = (name) => {
                     }
                 }
             },
-            { 
+            {
                 hydrate: true
             },
             (err, results) => {
@@ -43,9 +47,17 @@ const searchSkills = (name) => {
     })
 }
 
+const connect = () => mongoose.connect(`mongodb://${DBUSER}:${DBPWD}@${DBLINK}`)
+    .then(response => {
+        console.log("Connected to mongodb");
+        Promise.resolve(response);
+    })
+
+
 module.exports = {
     allSkills: allSkills,
     searchSkills: searchSkills,
-    index: index
+    index: index,
+    connect: connect
 }
 
