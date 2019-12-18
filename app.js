@@ -170,6 +170,9 @@ server.get('/skillsbyuzer/:uzerId', function (req, res, next) {
 				next();
 			})
 		}, function (err) {
+			if (!skillList){
+				return res.send(400, { error: "User doesn't have any skills" });
+			}
 			res.send(200, skillList);
 		});
 	})
@@ -177,7 +180,10 @@ server.get('/skillsbyuzer/:uzerId', function (req, res, next) {
 
 server.get('/uzersbyskill/:skillId', function (req, res, next) {
 	Uzer.find({ skills: req.params.skillId }, function (err, uzers) {
-		res.send(200, uzers);
+		if(!uzers){
+			return res.send(400,{ error: "No users have this skill"} );
+		}
+		return res.send(200, uzers);
 	})
 })
 
@@ -194,7 +200,7 @@ server.post('/removeuzerskill', function (req, res, next) {
 			}
 		}
 		uzer.save();
-		res.send(200, 'skill removed');
+		return res.send(200, 'skill removed');
 	});
 });
 
@@ -202,7 +208,7 @@ server.get('/getusersbyskill/:skillId', function (req, res, next) {
 	Uzer.find({ skills: req.params.skillId }, function (err, uzers) {
 		console.log(uzers);
 		if (uzers.length == 0) {
-			return res.send(400, { error: "Nobody has that skill" });
+			return res.send(400, "Nobody has that skill");
 		}
 		var userArray = [];
 		for (var i = 0; i < uzers.length; i++) {
